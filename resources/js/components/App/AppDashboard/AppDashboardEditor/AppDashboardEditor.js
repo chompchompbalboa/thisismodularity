@@ -38,7 +38,6 @@ export default class AppDashboardEditor extends Component {
       position,
       savePage
     } = this.props
-    console.log(activeModule)
 
     return (
       <AppDashboardContentContainer

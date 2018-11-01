@@ -49177,6 +49177,7 @@ var siteReducers = function siteReducers() {
       }
 
     case 'SET_SITE_STORE':
+      console.log(action.nextStore);
       return action.nextStore;
 
     default:
@@ -54484,7 +54485,6 @@ var AppDashboardEditor = (_dec = (0, _reactRedux.connect)(null, function (dispat
           position = _props.position,
           savePage = _props.savePage;
 
-      console.log(activeModule);
 
       return _react2.default.createElement(
         _AppDashboardContentContainer2.default,

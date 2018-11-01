@@ -284,7 +284,7 @@ const siteReducers = (state = defaultState, action) => {
       const {
         nextSiteName
       } = action
-      
+
       let nextState = _.cloneDeep(state)
       nextState.meta.name = nextSiteName
       return nextState
@@ -374,6 +374,7 @@ const siteReducers = (state = defaultState, action) => {
     }
 
     case 'SET_SITE_STORE':
+      console.log(action.nextStore)
       return action.nextStore
 
     default:
