@@ -374,7 +374,6 @@ const siteReducers = (state = defaultState, action) => {
     }
 
     case 'SET_SITE_STORE':
-      console.log(action.nextStore)
       return action.nextStore
 
     default:
