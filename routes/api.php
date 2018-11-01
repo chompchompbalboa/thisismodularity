@@ -1,18 +1,17 @@
 <?php
-
-use Illuminate\Http\Request;
+/*
+* This is modularity
+*
+* thisismodularity.com
+*/
+$thisismodularity = function() {
+    Route::post('/api', 'APIController@api');
+    
+};
+Route::group(['domain' => 'thisismodularity.com'], $thisismodularity);
+Route::group(['domain' => 'thisismodularity.local'], $thisismodularity);
 
 /*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
+* Other sites
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/api', 'APIController@api');

@@ -1,16 +1,22 @@
 <?php
+/*
+* This is modularity
+*
+* thisismodularity.com
+*/
+$thisismodularity = function() {
+    Route::get('/site/{domain}', 'SiteController@getSiteByDomain');
+    Route::post('/site/{id}', 'SiteController@saveSite');
+    Route::post('/page/{id}', 'PageController@savePage');
+
+    Route::get('/{any?}', 'BladeController@load')->where('any', '.*');
+    
+};
+Route::group(['domain' => 'thisismodularity.com'], $thisismodularity);
+Route::group(['domain' => 'thisismodularity.local'], $thisismodularity);
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+* Other sites
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/site/{domain}', 'SiteController@getByDomain');
+Route::get('/{any?}', 'BladeController@load')->where('any', '.*');
