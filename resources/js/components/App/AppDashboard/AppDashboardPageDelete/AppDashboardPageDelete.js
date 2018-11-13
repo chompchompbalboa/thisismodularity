@@ -6,11 +6,12 @@ import { func, number, object } from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { 
+import {
   setActiveDashboardContent as setActiveDashboardContentAction
-} from '../../../../actions/appActions';
-
-import AppDashboardPageModulesModule from '../AppDashboardPageModulesModule/AppDashboardPageModulesModule'
+} from '../../../../actions/appActions'
+import {
+  deletePage as deletePageAction
+} from '../../../../actions/siteActions'
 
 //-----------------------------------------------------------------------------
 // Redux
@@ -18,40 +19,35 @@ import AppDashboardPageModulesModule from '../AppDashboardPageModulesModule/AppD
 @connect(
   null,
   dispatch => ({
-    setActiveDashboardContent: (nextActive) => dispatch(setActiveDashboardContentAction(nextActive)) 
+    deletePage: (pageId, pageIndex) => dispatch(deletePageAction(pageId, pageIndex)),
+    setActiveDashboardContent: (nextActive) => dispatch(setActiveDashboardContentAction(nextActive))
   })
 )
 
 //-----------------------------------------------------------------------------
 // Component
 //-----------------------------------------------------------------------------
-export default class AppDashboardPageModules extends Component {
-  render() {
+export default class AppDashboardPageDelete extends Component {
+
+  handleDeleteClick = () => {
     const {
       activePage,
       activePageIndex,
+      deletePage,
       setActiveDashboardContent
     } = this.props
+    const activePageId = activePage.id
+    deletePage(activePageId, activePageIndex)
+    setActiveDashboardContent("OVERVIEW")
+  }
 
-    //console.log(activePage.modules)
+  render() {
     return (
       <Container>
-        {activePage.modules.map((module, index) => (
-          <AppDashboardPageModulesModule
-            key={index}
-            activePageIndex={activePageIndex}
-            isFirstModule={index === 0}
-            isLastModule={index === activePage.modules.length - 1}
-            module={module}
-            moduleIndex={index}/>
-        ))}
-        {
-          activePage.modules.length === 0 && 
-          <AddModule
-            onClick={() => setActiveDashboardContent("MODULES")}>
-            ADD A MODULE
-          </AddModule>
-        }
+        <Button
+          onClick={() => this.handleDeleteClick()}>
+          DELETE PAGE
+        </Button>
       </Container>
     )
   }
@@ -60,41 +56,29 @@ export default class AppDashboardPageModules extends Component {
 //-----------------------------------------------------------------------------
 // Props
 //-----------------------------------------------------------------------------
-AppDashboardPageModules.propTypes = {
+AppDashboardPageDelete.propTypes = {
   activePage: object,
   activePageIndex: number,
+  deletePage: func,
   setActiveDashboardContent: func
 }
-
 //-----------------------------------------------------------------------------
-// Styled Component
+// Styled Components
 //-----------------------------------------------------------------------------
 const Container = styled.div`
-  margin: 1.5vh 0 0 0;
-  width: 93vw;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  @media (min-width: 64em) {
-      width: 23.375vw;
-  }
+  width: 100%;
 `
 
-const AddModule = styled.div`
+const Button = styled.div`
   cursor: pointer;
-  margin: 0 0 1.5vh 0;
   width: 100%;
   height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(59, 203, 247, 0.75);
-  font-size: 0.8em;
-  font-weight: 400;
-  color: white;
+  background-color: red;
   border-radius: 10px;
-  &:hover {
-    background-color: rgba(59, 203, 247, 0.55);
-  }
+  font-family: Source Sans Pro, sans-serif;
+  font-size: 0.75em;
+  font-weight: 400;
 `

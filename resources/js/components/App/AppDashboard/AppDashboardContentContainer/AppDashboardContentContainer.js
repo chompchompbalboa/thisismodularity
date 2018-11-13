@@ -87,6 +87,7 @@ const Container = styled.div`
 const ChildrenContainer = styled.div`
   width: 100%;
   height: 69vh;
+  overflow-x: hidden;
   overflow-y: hidden;
 `
 
@@ -94,6 +95,7 @@ const ChildrenContainerNoScrollbar = styled.div`
   height: 100%;
   margin-right: -50px;
   padding-right: 50px;
+  overflow-x: hidden;
   overflow-y: scroll;
 `
 

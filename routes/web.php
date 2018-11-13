@@ -7,7 +7,9 @@
 $thisismodularity = function() {
     Route::get('/site/{domain}', 'SiteController@getSiteByDomain');
     Route::post('/site/{id}', 'SiteController@saveSite');
+    
     Route::post('/page/{id}', 'PageController@savePage');
+    Route::delete('/page/{id}', 'PageController@deletePage');
 
     Route::get('/{any?}', 'BladeController@load')->where('any', '.*');
     

@@ -2,7 +2,7 @@
 // Imports
 //-----------------------------------------------------------------------------
 import React from 'react'
-import { object, oneOf } from 'prop-types'
+import { number, object, oneOf } from 'prop-types'
 import styled from 'styled-components'
 
 import modulesMap from '../../maps/modulesMap'
@@ -10,7 +10,7 @@ import modulesMap from '../../maps/modulesMap'
 //-----------------------------------------------------------------------------
 // Component
 //-----------------------------------------------------------------------------
-const Page = ({ activeDevice, activePage }) => {
+const Page = ({ activeDevice, activeModule, activePage }) => {
   return (
     <Container>
       {activePage.modules.map((module, index) => {
@@ -19,6 +19,8 @@ const Page = ({ activeDevice, activePage }) => {
           {
             key: module.type + "-" + index,
             activeDevice: activeDevice,
+            activeModule: activeModule,
+            moduleIndex: index,
             data: module.data
           }
         )
@@ -37,6 +39,7 @@ Page.propTypes = {
     "TABLET",
     "DESKTOP"
   ]),
+  activeModule: number,
   activePage: object
 }
 

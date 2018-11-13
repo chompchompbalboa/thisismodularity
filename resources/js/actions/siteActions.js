@@ -53,9 +53,52 @@ export const changeSiteStore = (changes) => ({
   changes: changes
 })
 
-export const deleteModule = (pageIndex, moduleIndex) => ({
+export const deleteModule = (pageIndex, moduleIndex) => {
+  return (dispatch, getState) => {
+    // Delete the module
+    dispatch(deleteModuleReducer(pageIndex, moduleIndex))
+    // Save the modified page
+    const page = getState().site.pages[pageIndex]
+    dispatch(savePage(page, page.site_id))
+  }
+}
+
+export const deleteModuleReducer = (pageIndex, moduleIndex) => ({
   type: 'DELETE_MODULE',
   moduleIndex: moduleIndex,
+  pageIndex: pageIndex
+})
+
+export const deletePage = (pageId, pageIndex) => {
+  return dispatch => {
+    // Delete the module
+    dispatch(deletePageReducer(pageIndex))
+    dispatch(deletePageFromServer(pageId))
+  }
+}
+
+export const deletePageFromServer = (pageId) => {
+  return dispatch => {
+    window.clearTimeout(saveStatusTimeout)
+    dispatch(setActiveSaveStatus("SAVING"))
+    return axios.delete('/page/' + pageId)
+      .then(response => {
+        if(response.data.success) {
+          saveStatusTimeout = window.setTimeout(() => dispatch(setActiveSaveStatus("READY")), 1500)
+          return dispatch(setActiveSaveStatus("SAVE_SUCCESS"))
+        }
+        saveStatusTimeout = window.setTimeout(() => dispatch(setActiveSaveStatus("READY")), 1500)
+        return dispatch(setActiveSaveStatus("SAVE_FAILURE"))
+      })
+      .catch(() => {
+        saveStatusTimeout = window.setTimeout(() => dispatch(setActiveSaveStatus("READY")), 1500)
+        return dispatch(setActiveSaveStatus("SAVE_FAILURE"))
+      })
+  }
+}
+
+export const deletePageReducer = (pageIndex) => ({
+  type: 'DELETE_PAGE',
   pageIndex: pageIndex
 })
 
@@ -227,6 +270,7 @@ export const savePageToServer = (page, siteId) => {
     }).then(response => {
         if(response.data.success) {
           saveStatusTimeout = window.setTimeout(() => dispatch(setActiveSaveStatus("READY")), 1500)
+          dispatch(setPageId(page.id, response.data.id))
           return dispatch(setActiveSaveStatus("SAVE_SUCCESS"))
         }
         saveStatusTimeout = window.setTimeout(() => dispatch(setActiveSaveStatus("READY")), 1500)
@@ -275,6 +319,12 @@ export const setActiveModule = (nextActiveModule) => ({
 export const setActivePage = (nextActivePage) => ({
   type: 'SET_ACTIVE_PAGE',
   nextActivePage: nextActivePage
+})
+
+export const setPageId = (pageId, nextPageId) => ({
+  type: 'SET_PAGE_ID',
+  pageId: pageId,
+  nextPageId: nextPageId
 })
 
 export const setSiteStore = (nextStore) => ({

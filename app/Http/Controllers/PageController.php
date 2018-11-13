@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+  public function deletePage(Int $id) {
+    if(Page::destroy($id)) {
+      return [
+        "success" => true
+      ];
+    }
+  }
+
   public function savePage (Request $request, Int $id) {
     // Closure to save the page
     $savePage = function($page, $pageDataFromRequest, $siteId) {

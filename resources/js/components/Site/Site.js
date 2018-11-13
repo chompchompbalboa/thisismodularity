@@ -18,9 +18,10 @@ import Page from './Page/Page'
 @connect(
   state => ({
     activeDevice: state.app.active.device,
+    activeModule: state.site.active.module,
     activePage: state.site.active.page,
     isApp: state.app.isApp,
-    pages: state.site.pages
+    pages: state.site.pages,
   })
 )
 
@@ -31,6 +32,7 @@ export default class Site extends Component {
   render() {
     const {
       activeDevice,
+      activeModule,
       activePage,
       isApp,
       pages
@@ -42,7 +44,8 @@ export default class Site extends Component {
           activeDevice={activeDevice}
           isApp={isApp}>
           <Page
-            activeDevice={activeDevice} 
+            activeDevice={activeDevice}
+            activeModule={activeModule}
             activePage={pages[activePage]}/>
         </DeviceContainer>
       </Background>
@@ -59,6 +62,7 @@ Site.propTypes = {
     "TABLET",
     "DESKTOP"
   ]),
+  activeModule: number,
   activePage: number,
   isApp: bool,
   pages: array

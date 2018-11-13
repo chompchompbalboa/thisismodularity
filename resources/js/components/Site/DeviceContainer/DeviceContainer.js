@@ -17,7 +17,9 @@ const DeviceContainer = ({ activeDevice, children, isApp }) => {
   return (
     <Container
       deviceStyle={deviceStyle}>
-      {children}
+      <NoScrollBarContainer>
+        {children}
+      </NoScrollBarContainer>
     </Container>
   )
 }
@@ -52,8 +54,16 @@ const Container = styled.div`
   box-shadow: ${props => props.deviceStyle.boxShadow};
   background-color: white;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   transition: all 0.5s;
+`
+
+const NoScrollBarContainer = styled.div`
+  height: 100%;
+  margin-right: -50px;
+  padding-right: 50px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 `
 
 export default DeviceContainer

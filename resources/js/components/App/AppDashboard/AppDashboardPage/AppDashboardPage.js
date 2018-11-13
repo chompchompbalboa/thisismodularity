@@ -5,6 +5,7 @@ import React from 'react'
 import { number, object, oneOf } from 'prop-types'
 
 import AppDashboardContentContainer from '../AppDashboardContentContainer/AppDashboardContentContainer'
+import AppDashboardPageDelete from '../AppDashboardPageDelete/AppDashboardPageDelete'
 import AppDashboardPageModules from '../AppDashboardPageModules/AppDashboardPageModules'
 
 //-----------------------------------------------------------------------------
@@ -15,6 +16,9 @@ const AppDashboardPage = ({ activePage, activePageIndex, position }) => (
     back="OVERVIEW"
     position={position}>
     <AppDashboardPageModules
+      activePage={activePage}
+      activePageIndex={activePageIndex}/>
+    <AppDashboardPageDelete
       activePage={activePage}
       activePageIndex={activePageIndex}/>
   </AppDashboardContentContainer>

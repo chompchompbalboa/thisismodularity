@@ -1,24 +1,37 @@
 //-----------------------------------------------------------------------------
 // Imports
 //-----------------------------------------------------------------------------
-import React from 'react'
+import React, { Component } from 'react'
 import { object, oneOf, shape, string } from 'prop-types'
 import styled from 'styled-components'
 
 import { calculator } from '../../../utils/containerCalculator'
 
+import module from '../module/module'
+
 //-----------------------------------------------------------------------------
 // Component
 //-----------------------------------------------------------------------------
-const Image = ({ activeDevice, data }) => (
-  <Container
-    activeDevice={activeDevice}
-    styleData={data}>
-    <StyledImage
-      activeDevice={activeDevice}
-      styleData={data}/>
-  </Container>
-)
+class Image extends Component {
+  render() {
+    const {
+      activeDevice,
+      data,
+      moduleRef
+    } = this.props
+
+    return (
+      <Container
+        innerRef={moduleRef}
+        activeDevice={activeDevice}
+        styleData={data}>
+        <StyledImage
+          activeDevice={activeDevice}
+          styleData={data}/>
+      </Container>
+    )
+  }
+}
 
 //-----------------------------------------------------------------------------
 // Props
@@ -33,7 +46,8 @@ Image.propTypes = {
     height: object,
     src: string,
     width: object
-  })
+  }),
+  moduleRef: object
 }
 
 Image.defaultProps = {
@@ -61,4 +75,4 @@ const StyledImage = styled.div`
   transition: all 0.5s;
 `
 
-export default Image
+export default module(Image)

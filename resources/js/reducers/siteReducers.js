@@ -174,6 +174,18 @@ const siteReducers = (state = defaultState, action) => {
       return nextState
     }
 
+    case 'DELETE_PAGE': {
+      const {
+        pageIndex
+      } = action
+      
+      let nextState = _.cloneDeep(state)
+      nextState.active.page = pageIndex - 1 >= 0 ? pageIndex - 1 : 0 
+      nextState.active.module = 0
+      nextState.pages.splice(pageIndex, 1)
+      return nextState
+    }
+
     case 'EDIT_FONT_FAMILY': {
       const {
         pageIndex,
@@ -370,6 +382,18 @@ const siteReducers = (state = defaultState, action) => {
 
       let nextState = _.cloneDeep(state)
       nextState.active.page = nextActivePage
+      return nextState
+    }
+
+    case 'SET_PAGE_ID': {
+      const {
+        pageId,
+        nextPageId
+      } = action
+
+      let nextState = _.cloneDeep(state)
+      let pageIndex = _.findIndex(nextState.pages, ['id', pageId])
+      nextState.pages[pageIndex].id = nextPageId
       return nextState
     }
 

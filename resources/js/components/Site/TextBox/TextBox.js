@@ -1,26 +1,39 @@
 //-----------------------------------------------------------------------------
 // Imports
 //-----------------------------------------------------------------------------
-import React from 'react'
+import React, { Component } from 'react'
 import { bool, number, object, oneOf, shape, string } from 'prop-types'
 import styled from 'styled-components'
 
 import { calculator } from '../../../utils/containerCalculator'
 
+import module from '../module/module'
+
 //-----------------------------------------------------------------------------
 // Component
 //-----------------------------------------------------------------------------
-const TextBox = ({ activeDevice, data }) => (
-  <Container
-    activeDevice={activeDevice}
-    styleData={data}>
-    <TextContainer
-      activeDevice={activeDevice}
-      styleData={data}>
-      {data.text}
-    </TextContainer>
-  </Container>
-)
+class TextBox extends Component {
+  render() {
+    const {
+      activeDevice,
+      data,
+      moduleRef
+    } = this.props
+
+    return (
+      <Container
+        innerRef={moduleRef}
+        activeDevice={activeDevice}
+        styleData={data}>
+        <TextContainer
+          activeDevice={activeDevice}
+          styleData={data}>
+          {data.text}
+        </TextContainer>
+      </Container>
+    )
+  }
+}
 
 //-----------------------------------------------------------------------------
 // Props
@@ -72,7 +85,8 @@ TextBox.propTypes = {
         value: number
       })
     }),
-  })
+  }),
+  moduleRef: object
 }
 
 TextBox.defaultProps = {
@@ -124,4 +138,4 @@ const TextContainer = styled.div`
   white-space: pre-wrap;
 `
 
-export default TextBox
+export default module(TextBox)
