@@ -36,7 +36,7 @@ export default class AppDashboardPageModules extends Component {
     //console.log(activePage.modules)
     return (
       <Container>
-        {activePage.modules.map((module, index) => (
+        {activePage && activePage.modules.map((module, index) => (
           <AppDashboardPageModulesModule
             key={index}
             activePageIndex={activePageIndex}
@@ -45,8 +45,7 @@ export default class AppDashboardPageModules extends Component {
             module={module}
             moduleIndex={index}/>
         ))}
-        {
-          activePage.modules.length === 0 && 
+        {activePage && activePage.modules.length === 0 && 
           <AddModule
             onClick={() => setActiveDashboardContent("MODULES")}>
             ADD A MODULE

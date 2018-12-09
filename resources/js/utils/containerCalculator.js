@@ -27,6 +27,9 @@ export const calculator = {
   backgroundImage: (activeDevice, backgroundImage) => {
     return "url(" + backgroundImage + ")"
   },
+  color: (activeDevice, color) => {
+    return "rgba(" + color.r + "," + color.g + "," + color.b + "," + color.a + ")"
+  },
   fontSize: (activeDevice, fontSize) => {
     return (
       ((containerDimensions[activeDevice].height * (fontSize[activeDevice] / 100)) / 5) + "px "
@@ -45,6 +48,9 @@ export const calculator = {
       (containerDimensions[activeDevice].height * (padding[activeDevice].BOTTOM / 100)) + "px " +
       (containerDimensions[activeDevice].width * (padding[activeDevice].LEFT / 100)) + "px"
     )
+  },
+  textAlign: (activeDevice, textAlign) => {
+    return textAlign
   },
   width: (activeDevice, width) => {
     if(width[activeDevice].auto) {

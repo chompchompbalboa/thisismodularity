@@ -17,7 +17,7 @@ import AppDashboardHeader from './AppDashboardHeader/AppDashboardHeader'
   state => ({
     activeDashboardContent: state.app.active.dashboardContent,
     activeDevice: state.app.active.device,
-    activeModule: state.site.pages[state.site.active.page].modules[state.site.active.module],
+    activeModule: state.site.pages[state.site.active.page] && state.site.pages[state.site.active.page].modules[state.site.active.module],
     activeModuleIndex: state.site.active.module,
     activePage: state.site.pages[state.site.active.page],
     activePageIndex: state.site.active.page,
@@ -73,7 +73,7 @@ export default class AppDashboard extends Component {
           activeModule={activeModule}
           activeModuleIndex={activeModuleIndex}
           activePage={activePage}
-          activePageId={activePage.id}
+          activePageId={activePage && activePage.id}
           activePageIndex={activePageIndex}
           isVisible={isVisible}/>
       </Container>

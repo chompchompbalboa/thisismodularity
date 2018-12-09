@@ -45,6 +45,12 @@ TextBox.propTypes = {
     "DESKTOP"
   ]),
   data: shape({
+    color: shape({
+      r: number,
+      g: number,
+      b: number,
+      a: number
+    }),
     fontFamily: string,
     fontSize: shape({
       MOBILE: number, 
@@ -71,6 +77,7 @@ TextBox.propTypes = {
       DESKTOP: object
     }),
     text: string,
+    textAlign: string,
     width: shape({
       MOBILE: shape({
         auto: bool,
@@ -92,6 +99,7 @@ TextBox.propTypes = {
 TextBox.defaultProps = {
   activeDevice: "MOBILE",
   data: {
+    color: {r: 255, g: 255, b: 255, a: 1},
     fontFamily: "Source Sans Pro, sans-serif",
     fontSize: {
       MOBILE: 14,
@@ -109,6 +117,7 @@ TextBox.defaultProps = {
       DESKTOP: {TOP: 5, RIGHT: 5, BOTTOM: 5, LEFT: 5},
     },
     text: "Enter Text Here",
+    textAlign: "center",
     width: {
       MOBILE: {auto: false, value: 100},
       TABLET: {auto: false, value: 100},
@@ -116,7 +125,6 @@ TextBox.defaultProps = {
     },
   }
 }
-
 
 //-----------------------------------------------------------------------------
 // Styled Components
@@ -126,15 +134,16 @@ const Container = styled.div`
   height: ${props => calculator.height(props.activeDevice, props.styleData.height)};
   padding: ${props => calculator.padding(props.activeDevice, props.styleData.padding)};
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: justify;
   font-family: ${props => props.styleData.fontFamily};
   font-size: ${props => calculator.fontSize(props.activeDevice, props.styleData.fontSize)};
   transition: padding 0.5s;
 `
 
 const TextContainer = styled.div`
+  width: 100%;
+  color: ${props => calculator.color(props.activeDevice, props.styleData.color)};
+  text-align: ${props => calculator.textAlign(props.activeDevice, props.styleData.textAlign)};
   white-space: pre-wrap;
 `
 

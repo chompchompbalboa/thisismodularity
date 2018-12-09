@@ -123,7 +123,7 @@ const siteReducers = (state = defaultState, action) => {
     case 'ADD_PAGE': {
       let nextState = _.cloneDeep(state)
       const newPage = nextState.pages.length
-      const siteId = nextState.pages[newPage - 1].site_id
+      const siteId = nextState.id
       nextState.pages[newPage] = {
         id: _.random(-1, -5000),
         site_id: siteId,
@@ -183,6 +183,17 @@ const siteReducers = (state = defaultState, action) => {
       nextState.active.page = pageIndex - 1 >= 0 ? pageIndex - 1 : 0 
       nextState.active.module = 0
       nextState.pages.splice(pageIndex, 1)
+      return nextState
+    }
+
+    case 'EDIT_COLOR': {
+      const {
+        pageIndex,
+        moduleIndex,
+        nextColor
+      } = action
+      let nextState = _.cloneDeep(state)
+      nextState.pages[pageIndex].modules[moduleIndex].data.color = nextColor
       return nextState
     }
 
@@ -322,6 +333,17 @@ const siteReducers = (state = defaultState, action) => {
       
       let nextState = _.cloneDeep(state)
       nextState.pages[pageIndex].modules[moduleIndex].data[textKey] = nextText
+      return nextState
+    }
+
+    case 'EDIT_TEXT_ALIGN': {
+      const {
+        pageIndex,
+        moduleIndex,
+        nextTextAlign
+      } = action
+      let nextState = _.cloneDeep(state)
+      nextState.pages[pageIndex].modules[moduleIndex].data.textAlign = nextTextAlign
       return nextState
     }
 

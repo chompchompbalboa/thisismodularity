@@ -37,6 +37,7 @@ export default {
     editor: TextBoxEditor,
     name: "Text Box",
     data: {
+      color: {r: 0, g: 0, b: 0, a: 1},
       width: {
         MOBILE: {auto: false, value: 100},
         TABLET: {auto: false, value: 100},
@@ -54,6 +55,7 @@ export default {
         DESKTOP: 14
       },
       text: "Enter your text here.",
+      textAlign: "center",
       padding: {
         MOBILE: {TOP: 5, RIGHT: 5, BOTTOM: 5, LEFT: 5},
         TABLET: {TOP: 5, RIGHT: 5, BOTTOM: 5, LEFT: 5},

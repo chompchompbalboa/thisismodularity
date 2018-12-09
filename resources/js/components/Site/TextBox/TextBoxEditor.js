@@ -24,6 +24,14 @@ const TextBoxEditor = ({ activeDevice, activeModule: { data }, activeModuleIndex
       header="Text"
       textKey="text"
       value={data.text}/>
+    <EditFont
+      activeDevice={activeDevice}
+      activeModuleIndex={activeModuleIndex}
+      activePageIndex={activePageIndex}
+      color={data.color}
+      fontFamily={data.fontFamily}
+      fontSize={data.fontSize}
+      textAlign={data.textAlign}/>
     <EditWidthHeight
       activeDevice={activeDevice}
       activeModuleIndex={activeModuleIndex}
@@ -35,12 +43,6 @@ const TextBoxEditor = ({ activeDevice, activeModule: { data }, activeModuleIndex
       activeModuleIndex={activeModuleIndex}
       activePageIndex={activePageIndex}
       padding={data.padding}/>
-    <EditFont
-      activeDevice={activeDevice}
-      activeModuleIndex={activeModuleIndex}
-      activePageIndex={activePageIndex}
-      fontFamily={data.fontFamily}
-      fontSize={data.fontSize}/>
   </AppDashboardContentContainerSection>
 )
 

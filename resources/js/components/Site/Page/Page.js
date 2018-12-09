@@ -13,7 +13,7 @@ import modulesMap from '../../maps/modulesMap'
 const Page = ({ activeDevice, activeModule, activePage }) => {
   return (
     <Container>
-      {activePage.modules.map((module, index) => {
+      {activePage && activePage.modules.map((module, index) => {
         return React.createElement(
           modulesMap[module.type].component,
           {

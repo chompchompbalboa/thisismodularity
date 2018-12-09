@@ -1,10 +1,11 @@
 {
-  "presets": [
-    ["env"],
-    "react"
-  ],
   "plugins": [
-    "babel-plugin-transform-class-properties",
-    "transform-decorators-legacy"
-  ]
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose" : true }]
+  ],
+  "env": {
+    "test": {
+      "presets": [["@babel/env"], "@babel/react"]
+    }
+  }
 }

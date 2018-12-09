@@ -102,6 +102,14 @@ export const deletePageReducer = (pageIndex) => ({
   pageIndex: pageIndex
 })
 
+export const editColor = (pageIndex, moduleIndex, activeDevice, nextColor) => ({
+  type: 'EDIT_COLOR',
+  pageIndex: pageIndex,
+  moduleIndex: moduleIndex,
+  activeDevice: activeDevice,
+  nextColor: nextColor
+})
+
 export const editFontFamily = (pageIndex, moduleIndex, nextFontFamily) => ({
   type: 'EDIT_FONT_FAMILY',
   pageIndex: pageIndex,
@@ -218,6 +226,14 @@ export const editText = (pageIndex, moduleIndex, textKey, nextText) => ({
   moduleIndex: moduleIndex,
   textKey: textKey,
   nextText: nextText
+})
+
+export const editTextAlign = (pageIndex, moduleIndex, activeDevice, nextTextAlign) => ({
+  type: 'EDIT_TEXT_ALIGN',
+  pageIndex: pageIndex,
+  moduleIndex: moduleIndex,
+  activeDevice: activeDevice,
+  nextTextAlign: nextTextAlign
 })
 
 export const editWidthAuto = (pageIndex, moduleIndex, activeDevice, nextWidthAuto) => ({

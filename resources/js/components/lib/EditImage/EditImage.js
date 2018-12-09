@@ -10,7 +10,6 @@ import {
   setActiveDashboardContent as setActiveDashboardContentAction,
   setActiveImageSrcKey as setActiveImageSrcKeyAction
 } from '../../../actions/appActions'
-import { editImage as editImageAction } from '../../../actions/siteActions'
 
 import EditContainer from '../../lib/EditContainer/EditContainer'
 
@@ -20,7 +19,6 @@ import EditContainer from '../../lib/EditContainer/EditContainer'
 @connect(
   null,
   dispatch => ({
-    editImage: (pageIndex, moduleIndex, textKey, text) => dispatch(editImageAction(pageIndex, moduleIndex, textKey, text)),
     setActiveDashboardContent: (nextActive) => dispatch(setActiveDashboardContentAction(nextActive)),
     setActiveImageSrcKey: (nextActive) => dispatch(setActiveImageSrcKeyAction(nextActive))
   })
