@@ -59,9 +59,6 @@ export default class AppDashboardOverviewPages extends Component {
       <AppDashboardContentContainer
         position={position}>
         <PagesContainer>
-          <PageContainer>
-            Menu
-          </PageContainer>
           {pages.map((page, index) => (
             <PageContainer
               key={index}
